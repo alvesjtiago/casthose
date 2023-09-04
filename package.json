@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "hono": "^3.5.7",
     "http": "^0.0.1-security",
     "net": "^1.0.2",
     "next": "13.4.19",

@@ -1467,6 +1467,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hono@^3.5.7:
+  version "3.5.7"
+  resolved "https://registry.yarnpkg.com/hono/-/hono-3.5.7.tgz#5cd89ffb9b60a39974b20afe7ebd74ccfdba13ea"
+  integrity sha512-FKbkgLYpO9tQKkX5dzsmsUKDlat03LSjOjHfP7emsonKpj4bbr4ewWp7wiF8PnH4QUIM8r7XL+Zhrofe//zO6Q==
+
 http@^0.0.1-security:
   version "0.0.1-security"
   resolved "https://registry.yarnpkg.com/http/-/http-0.0.1-security.tgz#3aac09129d12dc2747bbce4157afde20ad1f7995"
