@@ -45,7 +45,7 @@ export default function Home() {
             ).json()
             const user = userResponse?.result?.user
 
-            const newMessages = allCasts.concat([
+            const newMessages = [
               {
                 hash: event?.mergeMessageBody?.message?.hash,
                 fid: Number(event?.mergeMessageBody?.message?.data?.fid),
@@ -54,7 +54,8 @@ export default function Home() {
                 avatarUrl: user?.pfp?.url,
                 text: message,
               },
-            ])
+              ...allCasts,
+            ]
             allCasts = newMessages
             setCasts(newMessages)
           }
