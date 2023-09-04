@@ -96,6 +96,7 @@ export default function Home() {
                   cast?.hash as Uint8Array,
                 )._unsafeUnwrap()}`}
                 target="_blank"
+                className="text-ellipsis overflow-hidden whitespace-pre-line [overflow-wrap:anywhere]"
               >
                 {cast.text}
               </a>
