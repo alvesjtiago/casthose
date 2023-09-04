@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
 export async function GET(_: Request, { params }: { params: { fid: string } }) {
   const user: any = await (
     await fetch(`https://api.warpcast.com/v2/user?fid=${params.fid}`, {
-      cache: "no-store",
+      cache: 'no-store',
     })
-  ).json();
+  ).json()
 
-  return NextResponse.json(user);
+  return NextResponse.json(user)
 }
