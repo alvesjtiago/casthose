@@ -79,11 +79,17 @@ export default function Home() {
       {casts?.map((cast) => {
         return (
           <div className="mt-5 flex" key={cast.hash?.toString()}>
-            <img
-              className="h-6 w-6 mr-4 flex-shrink-0 rounded-full object-cover"
-              src={cast.avatarUrl}
-              alt={cast.username}
-            />
+            <a
+              href={`http://warpcast.com/${cast.username}`}
+              target="_blank"
+              className="flex-shrink-0"
+            >
+              <img
+                className="h-6 w-6 mr-4 flex-shrink-0 rounded-full object-cover"
+                src={cast.avatarUrl}
+                alt={cast.username}
+              />
+            </a>
             <div>
               <a
                 href={`http://warpcast.com/${cast.username}/${bytesToHexString(
