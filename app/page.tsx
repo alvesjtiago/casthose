@@ -74,7 +74,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="container mx-auto max-w-2xl my-12">
+    <div className="container mx-auto max-w-2xl my-12 px-8">
       {casts.length == 0 && <div>Waiting for first cast...</div>}
       {casts?.map((cast) => {
         return (
