@@ -1,10 +1,10 @@
 # Casthose 🚰
 
-Casthose is a cast streaming platform connected directly to a [Farcaster hub]().
+Casthose is a cast streaming platform connected directly to a [Farcaster hub](https://docs.farcaster.xyz/protocol/architecture.html).
 
 ### Notes
 
-We recommend using [Neynar]() if you want the best development experience for Farcaster.
+We recommend using [Neynar](https://neynar.com/) if you want the best development experience for Farcaster.
 
 ## Getting Started
 
