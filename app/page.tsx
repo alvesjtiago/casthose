@@ -21,7 +21,6 @@ export default function Home() {
       eventTypes: [HubEventType.MERGE_MESSAGE],
     })
 
-    let allCasts = casts
     result.map((observable) => {
       observable.subscribe({
         async next(event: HubEvent) {
@@ -43,11 +42,7 @@ export default function Home() {
               avatarUrl: user?.pfp?.url,
               text,
             }
-
-            const newMessages = [newMessage, ...allCasts]
-
-            allCasts = newMessages
-            setCasts(newMessages)
+            setCasts((prev) => [newMessage, ...prev])
           }
         },
         error(err) {
