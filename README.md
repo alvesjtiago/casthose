@@ -25,6 +25,7 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to use Casthose.
+
 You should start seeing casts appearing as soon as they're published.
 
 ## Deployment
