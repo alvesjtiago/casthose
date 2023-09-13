@@ -8,19 +8,10 @@ import {
   bytesToHexString,
 } from '@farcaster/hub-web'
 
-interface Cast {
-  hash?: Uint8Array
-  fid: number
-  username: string
-  displayName: string
-  avatarUrl: string
-  text: string
-}
-
 export default function Home() {
   const [casts, setCasts] = useState<Cast[]>([])
 
-  const getStream = async () => {
+  const startStream = async () => {
     const nodeClient = getHubRpcClient(
       process.env.NEXT_PUBLIC_HUB_URL ?? '',
       {},
@@ -34,28 +25,27 @@ export default function Home() {
     result.map((observable) => {
       observable.subscribe({
         async next(event: HubEvent) {
-          const message =
-            event?.mergeMessageBody?.message?.data?.castAddBody?.text
+          const message = event?.mergeMessageBody?.message
 
-          if (message) {
-            const userResponse = await (
-              await fetch(
-                '/api/users/' + event?.mergeMessageBody?.message?.data?.fid,
-              )
-            ).json()
+          const hash = message?.hash
+          const text = message?.data?.castAddBody?.text
+          const fid = message?.data?.fid
+
+          if (hash && text) {
+            const userResponse = await (await fetch('/api/users/' + fid)).json()
             const user = userResponse?.result?.user
 
-            const newMessages = [
-              {
-                hash: event?.mergeMessageBody?.message?.hash,
-                fid: Number(event?.mergeMessageBody?.message?.data?.fid),
-                username: user?.username,
-                displayName: user?.displayName,
-                avatarUrl: user?.pfp?.url,
-                text: message,
-              },
-              ...allCasts,
-            ]
+            const newMessage: Cast = {
+              hash: hash,
+              fid: Number(fid),
+              username: user?.username,
+              displayName: user?.displayName,
+              avatarUrl: user?.pfp?.url,
+              text,
+            }
+
+            const newMessages = [newMessage, ...allCasts]
+
             allCasts = newMessages
             setCasts(newMessages)
           }
@@ -71,7 +61,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getStream()
+    startStream()
   }, [])
 
   return (
@@ -87,7 +77,7 @@ export default function Home() {
                 className="flex-shrink-0"
               >
                 <img
-                  className="h-6 w-6 mr-4 flex-shrink-0 rounded-full object-cover"
+                  className="h-6 w-6 mr-4 rounded-full object-cover"
                   src={cast.avatarUrl}
                   alt={cast.username}
                 />
@@ -96,9 +86,7 @@ export default function Home() {
                 <a
                   href={`http://warpcast.com/${
                     cast.username
-                  }/${bytesToHexString(
-                    cast?.hash as Uint8Array,
-                  )._unsafeUnwrap()}`}
+                  }/${bytesToHexString(cast.hash).unwrapOr('')}`}
                   target="_blank"
                   className="text-ellipsis overflow-hidden whitespace-pre-line [overflow-wrap:anywhere]"
                 >
